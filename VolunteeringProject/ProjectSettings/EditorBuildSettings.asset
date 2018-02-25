@@ -4,4 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Main.unity
+    guid: ca9fbd33c2432c647bf15dc936605069
+  - enabled: 1
+    path: Assets/FantomPlugin/Demo/Scenes/DialogTest.unity
+    guid: cab1883a5a58f8c4abfcd058fa812abf
