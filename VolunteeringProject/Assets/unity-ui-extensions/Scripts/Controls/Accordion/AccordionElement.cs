@@ -12,8 +12,8 @@ namespace UnityEngine.UI.Extensions
 	{
 
 		[SerializeField] private float m_MinHeight = 18f;
-		
-		private Accordion m_Accordion;
+
+        private Accordion m_Accordion;
 		private RectTransform m_RectTransform;
 		private LayoutElement m_LayoutElement;
 		
@@ -70,7 +70,7 @@ namespace UnityEngine.UI.Extensions
 		}
 #endif
 
-		public void OnValueChanged(bool state)
+		public virtual void OnValueChanged(bool state)
 		{
 			if (this.m_LayoutElement == null)
 				return;
@@ -92,7 +92,7 @@ namespace UnityEngine.UI.Extensions
 			{
 				if (state)
 				{
-					this.StartTween(this.m_MinHeight, this.GetExpandedHeight());
+					this.StartTween(this.m_MinHeight, GetExpandedHeight());
 				}
 				else
 				{
