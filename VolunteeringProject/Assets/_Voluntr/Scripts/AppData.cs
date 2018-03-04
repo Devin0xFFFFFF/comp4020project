@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public struct User {
     public string Name;
@@ -36,7 +37,7 @@ public struct EventInfo {
 
 public class AppData 
 {
-    public static User[] Users =
+    public static List<User> Users = new List<User>()
     {
         new User()
         {
@@ -103,7 +104,7 @@ public class AppData
         },
     };
 
-    public static EventInfo[] Events =
+    public static List<EventInfo> Events = new List<EventInfo>()
     {
         new EventInfo
         {

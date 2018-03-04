@@ -27,7 +27,7 @@ public class ListScreen : MonoBehaviour {
     private void BuildList() {
         EventList.Clear();
 
-        for (int i = 0; i < AppData.Events.Length; i++)
+        for (int i = 0; i < AppData.Events.Count; i++)
         {
             EventInfo evtInfo = AppData.Events[i];
             if(filterTags.Length == 0 || MatchesFilter(evtInfo.Tags.ToLower().Split(' ', ',')))

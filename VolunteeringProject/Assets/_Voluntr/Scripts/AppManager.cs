@@ -14,7 +14,7 @@ public class AppManager : MonoBehaviour {
 
     private void Awake() {
         _instance = this;
-        CurrentUser = AppData.Users[AppData.Users.Length - 1];
+        CurrentUser = AppData.Users[AppData.Users.Count - 1];
         SwitchToHomeScreen();
     }
 

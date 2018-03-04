@@ -6,7 +6,7 @@ public class HomeScreen : MonoBehaviour {
     private void OnEnable() {
         Feed.Clear();
 
-        for (int i = 0; i < AppData.Events.Length; i++)
+        for (int i = 0; i < AppData.Events.Count; i++)
         {
             Feed.AddItem(AppData.Events[i]);
         }
