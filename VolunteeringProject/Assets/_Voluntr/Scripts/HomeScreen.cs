@@ -11,21 +11,6 @@ public class HomeScreen : MonoBehaviour {
             Feed.AddItem(AppData.Events[i]);
         }
 
-        for (int i = 0; i < AppData.Events.Length; i++)
-        {
-            Feed.AddItem(AppData.Events[i]);
-        }
-
-        for (int i = 0; i < AppData.Events.Length; i++)
-        {
-            Feed.AddItem(AppData.Events[i]);
-        }
-
-        for (int i = 0; i < AppData.Events.Length; i++)
-        {
-            Feed.AddItem(AppData.Events[i]);
-        }
-
         Feed.OnItemSelected += Feed_OnItemSelected;
     }
 

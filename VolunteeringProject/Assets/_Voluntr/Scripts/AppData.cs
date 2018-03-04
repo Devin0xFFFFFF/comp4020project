@@ -2,6 +2,8 @@
 
 public struct User {
     public string Name;
+    public Link[] Links;
+    public string About;
     public int[] PreviousExperienceIDs;
 }
 
@@ -39,42 +41,65 @@ public class AppData
         new User()
         {
             Name = "Gasper Haar",
-            PreviousExperienceIDs = { }
+            Links = new Link[]
+            {
+                new Link()
+                {
+                    Type = Link.LinkType.Facebook,
+                    Path = ""
+                }
+            },
+            About = "Volunteer",
+            PreviousExperienceIDs = new int[] { }
         },
         new User()
         {
             Name = "Ardisj Nesson",
-            PreviousExperienceIDs = { }
+            Links = new Link[] { },
+            About = "Volunteer",
+            PreviousExperienceIDs = new int[] { }
         },
         new User()
         {
             Name = "Haroun Titterington",
-            PreviousExperienceIDs = { }
+            Links = new Link[] { },
+            About = "Volunteer",
+            PreviousExperienceIDs = new int[] { }
         },
         new User()
         {
             Name = "Felizio Martini",
-            PreviousExperienceIDs = { }
+            Links = new Link[] { },
+            About = "Volunteer",
+            PreviousExperienceIDs = new int[] { }
         },
         new User()
         {
             Name = "Colin Smith",
-            PreviousExperienceIDs = { }
+            Links = new Link[] { },
+            About = "Volunteer",
+            PreviousExperienceIDs = new int[] { }
         },
         new User()
         {
             Name = "Tabby Archuleta",
-            PreviousExperienceIDs = { }
+            Links = new Link[] { },
+            About = "Volunteer",
+            PreviousExperienceIDs = new int[] { }
         },
         new User()
         {
             Name = "Clarke Mishkin",
-            PreviousExperienceIDs = { }
+            Links = new Link[] { },
+            About = "Volunteer",
+            PreviousExperienceIDs = new int[] { }
         },
         new User()
         {
             Name = "Conni Todorovic",
-            PreviousExperienceIDs = { }
+            Links = new Link[] { },
+            About = "Volunteer",
+            PreviousExperienceIDs = new int[] { 0 }
         },
     };
 
