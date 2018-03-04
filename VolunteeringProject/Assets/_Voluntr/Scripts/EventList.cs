@@ -1,23 +1,54 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EventList : MonoBehaviour {
+    public event Action<EventItem> OnItemSelected;
+
     public EventItem ItemPrefab;
     public Transform Accordion;
     public int MaxItems = 10;
 
-    private void Start() {
-        for(int i = 0; i < MaxItems; i++)
+    private EventItem _selected;
+    private EventItem _lastSelected;
+
+    public void AddItem(EventInfo eventInfo) {
+        EventItem item = Instantiate(ItemPrefab, Accordion);
+        item.transform.SetAsFirstSibling();
+        item.Set(eventInfo);
+
+        item.OnSelected += Item_OnSelected;
+    }
+
+    public void Clear() {
+        for(int i = Accordion.childCount - 1; i >= 0; i--)
         {
-            AddItem("Item" + i, DateTime.Now.ToShortDateString(), "UofM", "tag");
+            EventItem item = Accordion.GetChild(i).GetComponent<EventItem>();
+            if(item != null)
+            {
+                Destroy(item.gameObject);
+            }
         }
     }
 
-    public void AddItem(string name, string time, string location, string tags) {
-        EventItem item = Instantiate(ItemPrefab, Accordion);
-        item.transform.SetAsFirstSibling();
-        item.Set(name, time, location, tags);
+    private void Item_OnSelected(EventItem item, bool state) {
+
+        if(item == _lastSelected)
+        {
+            _lastSelected = null;
+        }
+        else if(_selected != item)
+        {
+            _lastSelected = _selected;
+            _selected = item;
+
+            if (_lastSelected != null)
+            {
+                _lastSelected.Selected = false;
+            }
+        }
+        else if(_selected == item && OnItemSelected != null)
+        {
+            OnItemSelected(_selected);
+        }
     }
 }
