@@ -18,7 +18,6 @@ public class EventList : MonoBehaviour {
 
     public void AddItem(EventInfo eventInfo) {
         EventItem item = Instantiate(ItemPrefab, Accordion);
-        item.transform.SetAsFirstSibling();
         item.Set(eventInfo);
 
         ScrollRect.onValueChanged.AddListener(OnScroll);
