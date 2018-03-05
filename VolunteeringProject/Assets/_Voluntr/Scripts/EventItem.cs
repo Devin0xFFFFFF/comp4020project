@@ -25,7 +25,7 @@ public class EventItem : MonoBehaviour {
 
         NameText.text = eventInfo.Name;
         TimeText.text = eventInfo.Time.ToShortDateString();
-        LocationText.text = eventInfo.LocationName;
+        LocationText.text = eventInfo.Location;
         TagsText.text = eventInfo.Tags;
     }
 

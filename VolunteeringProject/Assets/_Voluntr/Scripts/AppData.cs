@@ -25,7 +25,7 @@ public enum Requirement {
 public struct EventInfo {
     public string Name;
     public DateTime Time;
-    public string LocationName;
+    public string Location;
     public float Latitude;
     public float Longitude;
     public int[] OrganizerIDs;
@@ -110,7 +110,7 @@ public class AppData
         {
             Name = "HSC Ambassador",
             Time = GetRandomFutureDate(),
-            LocationName = "820 Sherbrook Street, Winnipeg MB",
+            Location = "820 Sherbrook Street, Winnipeg MB",
             Latitude = 49.903159f,
             Longitude = -97.157414f,
             OrganizerIDs = new int[] { 0 },
@@ -126,7 +126,7 @@ public class AppData
         {
             Name = "Event 2",
             Time = GetRandomFutureDate(),
-            LocationName = "UofM",
+            Location = "UofM",
             Latitude = 0,
             Longitude = 0,
             OrganizerIDs = new int[] { 1 },
@@ -142,7 +142,7 @@ public class AppData
         {
             Name = "Event 3",
             Time = GetRandomFutureDate(),
-            LocationName = "UofM",
+            Location = "UofM",
             Latitude = 0,
             Longitude = 0,
             OrganizerIDs = new int[] { 2 },
@@ -158,7 +158,7 @@ public class AppData
         {
             Name = "Event 4",
             Time = GetRandomFutureDate(),
-            LocationName = "UofM",
+            Location = "UofM",
             Latitude = 0,
             Longitude = 0,
             OrganizerIDs = new int[] { 3, 4 },
@@ -174,7 +174,7 @@ public class AppData
         {
             Name = "Event 5",
             Time = GetRandomFutureDate(),
-            LocationName = "UofM",
+            Location = "UofM",
             Latitude = 0,
             Longitude = 0,
             OrganizerIDs = new int[] { 5 },
@@ -190,7 +190,7 @@ public class AppData
         {
             Name = "Event 6",
             Time = GetRandomFutureDate(),
-            LocationName = "UofM",
+            Location = "UofM",
             Latitude = 0,
             Longitude = 0,
             OrganizerIDs = new int[] { 6 },

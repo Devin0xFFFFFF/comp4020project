@@ -25,7 +25,7 @@ public class EventScreen : MonoBehaviour {
         SetActionButton();
         SetOrganizers();
         TimeText.text = eventInfo.Time.ToShortDateString();
-        LocationText.text = eventInfo.LocationName;
+        LocationText.text = eventInfo.Location;
         TagsText.text = eventInfo.Tags;
         DescriptionText.text = eventInfo.Description;
         SetLinks();

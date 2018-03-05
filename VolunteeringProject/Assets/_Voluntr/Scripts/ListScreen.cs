@@ -12,6 +12,7 @@ public class ListScreen : MonoBehaviour {
 
     private void Awake() {
         FilterInput.onEndEdit.AddListener(ApplyFilter);
+        EventList.OnItemSelected += EventList_OnItemSelected;
     }
 
     private void Start() {
@@ -22,6 +23,10 @@ public class ListScreen : MonoBehaviour {
     private void ApplyFilter(string filterInput) {
         filterTags = filterInput.ToLower().Split(' ', ',');
         BuildList();
+    }
+
+    private void EventList_OnItemSelected(EventItem item) {
+        AppManager.SwitchToEventScreen(item.EventInfo);
     }
 
     private void BuildList() {

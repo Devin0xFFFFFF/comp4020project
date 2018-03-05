@@ -53,10 +53,10 @@ public class ProfileScreen : MonoBehaviour {
             EventList.AddItem(AppData.Events[_user.PreviousExperienceIDs[i]]);
         }
 
-        EventList.OnItemSelected += Feed_OnItemSelected;
+        EventList.OnItemSelected += EventList_OnItemSelected;
     }
 
-    private void Feed_OnItemSelected(EventItem item) {
+    private void EventList_OnItemSelected(EventItem item) {
         AppManager.SwitchToEventScreen(item.EventInfo);
     }
 

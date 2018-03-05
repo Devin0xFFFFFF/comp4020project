@@ -7,6 +7,7 @@ public class CreateScreen : MonoBehaviour {
     public DatePickerController DatePickerController;
     public MultiChoiceDialogController LinkMultiChoiceDialogController;
     public MultiChoiceDialogController RequirementMultiChoiceDialogController;
+    public YesNoDialogController CreateYesNoDialogController;
 
     public InputField NameInput;
     public Text DateText;
@@ -45,7 +46,13 @@ public class CreateScreen : MonoBehaviour {
 
         LinkMultiChoiceDialogController.OnResultIndex.AddListener(SetLinks);
 
-        CreateButton.onClick.AddListener(CreateOpportunity);
+        CreateButton.onClick.AddListener(delegate()
+        {
+            CreateYesNoDialogController.Show();
+        });
+
+        CreateYesNoDialogController.OnYes.AddListener(CreateOpportunity);
+        CreateYesNoDialogController.message = "Confirm Creation";
 
         _links = new Link[0];
         _requirements = new Requirement[0];
@@ -53,7 +60,7 @@ public class CreateScreen : MonoBehaviour {
 
     private void OnEnable() {
         NameInput.text = "";
-        DateText.text = "Select a Date";
+        DateText.text = DateTime.Now.ToShortDateString();
         LocationInput.text = "";
         TagsInput.text = "";
         DescriptionInput.text = "";
@@ -72,12 +79,12 @@ public class CreateScreen : MonoBehaviour {
         }, false);
     }
 
-    private void CreateOpportunity() {
+    private void CreateOpportunity(string result) {
         EventInfo evtInfo = new EventInfo()
         {
             Name = NameInput.text,
             Time = DateTime.Parse(DateText.text),
-            LocationName = LocationInput.text,
+            Location = LocationInput.text,
             Latitude = 0,
             Longitude = 0,
             Tags = TagsInput.text,
@@ -88,6 +95,8 @@ public class CreateScreen : MonoBehaviour {
         };
 
         AppData.Events.Add(evtInfo);
+
+        AppManager.SwitchToEventScreen(evtInfo);
     }
 
     private void OnSelectDate(string dateText) {
