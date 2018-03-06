@@ -5,6 +5,8 @@ public class AppManager : MonoBehaviour {
 
     private static AppManager _instance;
 
+    public Menu Menu;
+
     public HomeScreen HomeScreen;
     public EventScreen EventScreen;
     public ProfileScreen ProfileScreen;
@@ -15,7 +17,16 @@ public class AppManager : MonoBehaviour {
     private void Awake() {
         _instance = this;
         CurrentUser = AppData.Users[AppData.Users.Count - 1];
+        HideMenu();
         SwitchToHomeScreen();
+    }
+
+    public static void ShowMenu() {
+        _instance.Menu.Show();
+    }
+
+    public static void HideMenu() {
+        _instance.Menu.Hide();
     }
 
     public static void SwitchToHomeScreen() {

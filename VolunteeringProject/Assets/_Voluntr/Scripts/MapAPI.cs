@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
+//https://www.youtube.com/watch?v=3ExhMNLmQtc
 public class MapAPI : MonoBehaviour {
 
     public const float WPG_LAT = 49.8951f;
@@ -17,9 +18,9 @@ public class MapAPI : MonoBehaviour {
     public string ApiKey;
 
     public int MinZoom = 8;
-    public int MaxZoom = 14;
+    public int MaxZoom = 16;
 
-    public int Zoom = 14;
+    public int Zoom = 16;
     public int MapWidth = 640;
     public int MapHeight = 640;
 
@@ -30,7 +31,7 @@ public class MapAPI : MonoBehaviour {
     }
 
     private void OnEnable() {
-        Zoom = MaxZoom;
+        Zoom = MinZoom;
         StartCoroutine(_GetMap());
     }
 

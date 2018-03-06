@@ -15,7 +15,7 @@ public class ListScreen : MonoBehaviour {
         EventList.OnItemSelected += EventList_OnItemSelected;
     }
 
-    private void Start() {
+    private void OnEnable() {
         filterTags = new string[0];
         BuildList();
     }

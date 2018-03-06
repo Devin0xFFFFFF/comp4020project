@@ -21,6 +21,14 @@ public class ProfileScreen : MonoBehaviour {
         SetEvents();
     }
 
+    private void OnEnable() {
+        if(_user.Name !=  null) // Cheap way to check if page has been set
+        {
+            SetLinks();
+            SetEvents();
+        }
+    }
+
     private void SetLinks() {
         Clear(LinksList);
 
