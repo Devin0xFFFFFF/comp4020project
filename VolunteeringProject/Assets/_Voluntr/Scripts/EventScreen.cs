@@ -1,7 +1,12 @@
-﻿using UnityEngine;
+﻿using FantomLib;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class EventScreen : MonoBehaviour {
+    public YesNoWithCheckBoxDialogController RegisterYesNoWithCheckBoxDialogController;
+    public AndroidActionController LinkController;
+    public ToastController ToastController;
+
     public Text NameText;
     public Button ActionButton;
     public Transform OrganizerList;
@@ -15,6 +20,9 @@ public class EventScreen : MonoBehaviour {
     public OrganizerButton OrganizerButton;
     public LinkButton LinkButton;
     public RequirementButton RequirementButton;
+
+    public Sprite UnregisteredSprite;
+    public Sprite RegisteredSprite;
 
     private EventInfo _eventInfo;
 
@@ -30,10 +38,44 @@ public class EventScreen : MonoBehaviour {
         DescriptionText.text = eventInfo.Description;
         SetLinks();
         SetRequirements();
+
+        ActionButton.onClick.AddListener(ShowRegister);
+
+        RegisterYesNoWithCheckBoxDialogController.OnYes.AddListener(Register);
+    }
+
+    private void ShowRegister() {
+        bool registered = _eventInfo.VolunteerIDs.Contains(AppManager.CurrentUser.ID);
+        RegisterYesNoWithCheckBoxDialogController.DefaultChecked = registered;
+        RegisterYesNoWithCheckBoxDialogController.message = (registered ? "Unregister" : "Register") + " for Opportunity?";
+        RegisterYesNoWithCheckBoxDialogController.checkBoxText = "Check to " + (registered ? "Unregister" : "Register");
+        RegisterYesNoWithCheckBoxDialogController.Show();
+    }
+
+    private void Register(string s, bool yes) {
+        if (yes && !_eventInfo.VolunteerIDs.Contains(AppManager.CurrentUser.ID))
+        {
+            _eventInfo.VolunteerIDs.Add(AppManager.CurrentUser.ID);
+            ToastController.Show("Registered.");
+        }
+        else if(_eventInfo.VolunteerIDs.Contains(AppManager.CurrentUser.ID))
+        {
+            _eventInfo.VolunteerIDs.Remove(AppManager.CurrentUser.ID);
+            ToastController.Show("Unregistered.");
+        }
+
+        SetActionButton();
     }
 
     private void SetActionButton() {
-        //ActionButton state control and signup
+        if(_eventInfo.VolunteerIDs.Contains(AppManager.CurrentUser.ID))
+        {
+            ActionButton.transform.GetChild(0).GetComponent<Image>().sprite = RegisteredSprite;
+        }
+        else
+        {
+            ActionButton.transform.GetChild(0).GetComponent<Image>().sprite = UnregisteredSprite;
+        }
     }
 
     private void SetOrganizers() {
@@ -59,7 +101,7 @@ public class EventScreen : MonoBehaviour {
             button.Set(link);
             button.Button.onClick.AddListener(delegate ()
             {
-                //Android open browser to link.Path
+                LinkController.StartActionURI(link.Path);
             });
         }
     }

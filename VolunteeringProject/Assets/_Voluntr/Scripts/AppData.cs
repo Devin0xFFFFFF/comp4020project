@@ -6,6 +6,8 @@ public struct User {
     public Link[] Links;
     public string About;
     public int[] PreviousExperienceIDs;
+
+    public int ID {  get { return AppData.Users.IndexOf(this); } }
 }
 
 public struct Link {
@@ -33,6 +35,7 @@ public struct EventInfo {
     public Link[] Links;
     public string Description;
     public Requirement[] Requirements;
+    public List<int> VolunteerIDs;
 }
 
 public class AppData 
@@ -120,7 +123,8 @@ public class AppData
                 new Link() { Type = Link.LinkType.Default, Path = "http://www.hsc.mb.ca" }
             },
             Description = "Direct or escort patients and/or families/friends to the appropriate areas as needed, provide information, support to patients and visitors.",
-            Requirements = new Requirement[] { }
+            Requirements = new Requirement[] { Requirement.BackgroundCheck },
+            VolunteerIDs = new List<int>()
         },
         new EventInfo
         {
@@ -136,7 +140,8 @@ public class AppData
                 new Link() { Type = Link.LinkType.Default, Path = "http://www.hsc.mb.ca" }
             },
             Description = "",
-            Requirements = new Requirement[] { }
+            Requirements = new Requirement[] { },
+            VolunteerIDs = new List<int>()
         },
         new EventInfo
         {
@@ -152,7 +157,8 @@ public class AppData
                 new Link() { Type = Link.LinkType.Default, Path = "http://www.hsc.mb.ca" }
             },
             Description = "UofM",
-            Requirements = new Requirement[] { }
+            Requirements = new Requirement[] { },
+            VolunteerIDs = new List<int>()
         },
         new EventInfo
         {
@@ -168,7 +174,8 @@ public class AppData
                 new Link() { Type = Link.LinkType.Default, Path = "http://www.hsc.mb.ca" }
             },
             Description = "",
-            Requirements = new Requirement[] { }
+            Requirements = new Requirement[] { },
+            VolunteerIDs = new List<int>()
         },
         new EventInfo
         {
@@ -184,7 +191,8 @@ public class AppData
                 new Link() { Type = Link.LinkType.Default, Path = "http://www.hsc.mb.ca" }
             },
             Description = "",
-            Requirements = new Requirement[] { }
+            Requirements = new Requirement[] { },
+            VolunteerIDs = new List<int>()
         },
         new EventInfo
         {
@@ -200,7 +208,8 @@ public class AppData
                 new Link() { Type = Link.LinkType.Default, Path = "http://www.hsc.mb.ca" }
             },
             Description = "",
-            Requirements = new Requirement[] { }
+            Requirements = new Requirement[] { },
+            VolunteerIDs = new List<int>()
         },
     };
 

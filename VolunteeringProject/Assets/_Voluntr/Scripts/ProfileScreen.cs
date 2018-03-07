@@ -1,7 +1,10 @@
-﻿using UnityEngine;
+﻿using FantomLib;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ProfileScreen : MonoBehaviour {
+    public AndroidActionController LinkController;
+
     public Text NameText;
     public Image UserImage;
     public Transform LinksList;
@@ -39,6 +42,7 @@ public class ProfileScreen : MonoBehaviour {
             button.Button.onClick.AddListener(delegate ()
             {
                 //Android open browser to link.Path
+                LinkController.StartActionURI(link.Path);
             });
         }
     }

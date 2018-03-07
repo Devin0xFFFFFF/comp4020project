@@ -8,6 +8,7 @@ public class CreateScreen : MonoBehaviour {
     public MultiChoiceDialogController LinkMultiChoiceDialogController;
     public MultiChoiceDialogController RequirementMultiChoiceDialogController;
     public YesNoDialogController CreateYesNoDialogController;
+    public ToastController ToastController;
 
     public InputField NameInput;
     public Text DateText;
@@ -46,13 +47,14 @@ public class CreateScreen : MonoBehaviour {
 
         LinkMultiChoiceDialogController.OnResultIndex.AddListener(SetLinks);
 
+        RequirementMultiChoiceDialogController.OnResultIndex.AddListener(SetRequirements);
+
         CreateButton.onClick.AddListener(delegate()
         {
             CreateYesNoDialogController.Show();
         });
 
         CreateYesNoDialogController.OnYes.AddListener(CreateOpportunity);
-        CreateYesNoDialogController.message = "Confirm Creation";
 
         _links = new Link[0];
         _requirements = new Requirement[0];
@@ -91,10 +93,13 @@ public class CreateScreen : MonoBehaviour {
             Description = DescriptionInput.text,
             OrganizerIDs = new int[] { AppData.Users.Count - 1 }, // Hard code current user as last user
             Links = _links,
-            Requirements = _requirements
+            Requirements = _requirements,
+            VolunteerIDs = new System.Collections.Generic.List<int>()
         };
 
         AppData.Events.Add(evtInfo);
+
+        ToastController.Show("Created " + evtInfo.Name + ".");
 
         AppManager.SwitchToEventScreen(evtInfo);
     }
