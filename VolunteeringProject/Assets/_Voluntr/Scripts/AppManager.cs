@@ -19,6 +19,7 @@ public class AppManager : MonoBehaviour {
         CurrentUser = AppData.Users[AppData.Users.Count - 1];
         HideMenu();
         SwitchToHomeScreen();
+        StartCoroutine(MapScreen._GetMap());
     }
 
     public static void ShowMenu() {
