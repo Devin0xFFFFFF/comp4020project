@@ -53,52 +53,52 @@ public class AppData
                 new Link()
                 {
                     Type = Link.LinkType.Facebook,
-                    Path = ""
+                    Path = "https://www.facebook.com"
                 }
             },
-            About = "Volunteer",
+            About = "HSC Coordinator",
             PreviousExperienceIDs = new int[] { }
         },
         new User()
         {
             Name = "Ardisj Nesson",
             Links = new Link[] { },
-            About = "Volunteer",
+            About = "City of Winnipeg Employee",
             PreviousExperienceIDs = new int[] { }
         },
         new User()
         {
             Name = "Haroun Titterington",
             Links = new Link[] { },
-            About = "Volunteer",
+            About = "Government of Manitoba Employee",
             PreviousExperienceIDs = new int[] { }
         },
         new User()
         {
             Name = "Felizio Martini",
             Links = new Link[] { },
-            About = "Volunteer",
+            About = "Human Rights Museum Volunteer Outreach Coordinator",
             PreviousExperienceIDs = new int[] { }
         },
         new User()
         {
             Name = "Colin Smith",
             Links = new Link[] { },
-            About = "Volunteer",
+            About = "Human Rights Activist",
             PreviousExperienceIDs = new int[] { }
         },
         new User()
         {
             Name = "Tabby Archuleta",
             Links = new Link[] { },
-            About = "Volunteer",
+            About = "Senior Citizen",
             PreviousExperienceIDs = new int[] { }
         },
         new User()
         {
             Name = "Clarke Mishkin",
             Links = new Link[] { },
-            About = "Volunteer",
+            About = "WAG Volunteer Director",
             PreviousExperienceIDs = new int[] { }
         },
         new User()
