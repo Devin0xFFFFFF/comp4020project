@@ -19,7 +19,7 @@ public class AppManager : MonoBehaviour {
         CurrentUser = AppData.Users[AppData.Users.Count - 1];
         HideMenu();
         SwitchToHomeScreen();
-        StartCoroutine(MapScreen._GetMap());
+        BuildMap();
     }
 
     public static void ShowMenu() {
@@ -60,6 +60,10 @@ public class AppManager : MonoBehaviour {
     public static void SwitchToCreateScreen() {
         _instance.DisableAllScreens();
         _instance.CreateScreen.gameObject.SetActive(true);
+    }
+
+    public static void BuildMap() {
+        _instance.StartCoroutine(_instance.MapScreen._BuildMap());
     }
 
     private void DisableAllScreens() {

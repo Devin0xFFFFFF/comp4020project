@@ -5,10 +5,15 @@ public class HomeScreen : MonoBehaviour {
 
     private void OnEnable() {
         Feed.Clear();
+        int userID = AppManager.CurrentUser.ID;
 
         for (int i = 0; i < AppData.Events.Count; i++)
         {
-            Feed.AddItem(AppData.Events[i]);
+            EventInfo evtInfo = AppData.Events[i];
+            if (evtInfo.VolunteerIDs.Contains(userID) || evtInfo.OrganizerIDs.Contains(userID))
+            {
+                Feed.AddItem(evtInfo);
+            }
         }
 
         Feed.OnItemSelected += Feed_OnItemSelected;

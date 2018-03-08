@@ -30,7 +30,7 @@ public struct EventInfo {
     public string Location;
     public float Latitude;
     public float Longitude;
-    public int[] OrganizerIDs;
+    public List<int> OrganizerIDs;
     public string Tags;
     public Link[] Links;
     public string Description;
@@ -40,6 +40,9 @@ public struct EventInfo {
 
 public class AppData 
 {
+    public const string MAPS_API_KEY = "AIzaSyDtOGHPkTIRv18aUot0G-GeQ0lgrpqvOMo";
+    public const string GEOCODE_API_KEY = "AIzaSyC51TwSVwidbd6Qu9LpWVgeHPTxoSuWYuQ";
+
     public static List<User> Users = new List<User>()
     {
         new User()
@@ -116,7 +119,7 @@ public class AppData
             Location = "820 Sherbrook Street, Winnipeg MB",
             Latitude = 49.903159f,
             Longitude = -97.157414f,
-            OrganizerIDs = new int[] { 0 },
+            OrganizerIDs = new List<int>() { 0 },
             Tags = "Medicine CustomerService Exercise",
             Links = new Link[] 
             {
@@ -124,90 +127,90 @@ public class AppData
             },
             Description = "Direct or escort patients and/or families/friends to the appropriate areas as needed, provide information, support to patients and visitors.",
             Requirements = new Requirement[] { Requirement.BackgroundCheck },
-            VolunteerIDs = new List<int>()
+            VolunteerIDs = new List<int>() { 7 }
         },
         new EventInfo
         {
-            Name = "Event 2",
+            Name = "Fun at the Forks",
             Time = GetRandomFutureDate(),
-            Location = "UofM",
-            Latitude = 0,
-            Longitude = 0,
-            OrganizerIDs = new int[] { 1 },
-            Tags = "",
+            Location = "The Forks, Winnipeg MB",
+            Latitude = 49.8873789f,
+            Longitude = -97.1333737f,
+            OrganizerIDs = new List<int>() { 1 },
+            Tags = "Fun",
+            Links = new Link[]
+            {
+                new Link() { Type = Link.LinkType.Default, Path = "http://www.theforks.com/" }
+            },
+            Description = "Come out The Forks to help facilitate winter activities!",
+            Requirements = new Requirement[] { },
+            VolunteerIDs = new List<int>() { 7 }
+        },
+        new EventInfo
+        {
+            Name = "Legislative Attendant",
+            Time = GetRandomFutureDate(),
+            Location = "Manitoba Legislative Building",
+            Latitude = 49.889359f,
+            Longitude = -97.1545129f,
+            OrganizerIDs = new List<int>() { 2 },
+            Tags = "Gov Manitoba",
             Links = new Link[]
             {
                 new Link() { Type = Link.LinkType.Default, Path = "http://www.hsc.mb.ca" }
             },
-            Description = "",
+            Description = "Help out at the legislature.",
             Requirements = new Requirement[] { },
             VolunteerIDs = new List<int>()
         },
         new EventInfo
         {
-            Name = "Event 3",
+            Name = "Museum Guide",
             Time = GetRandomFutureDate(),
-            Location = "UofM",
-            Latitude = 0,
-            Longitude = 0,
-            OrganizerIDs = new int[] { 2 },
-            Tags = "",
+            Location = "Canadian Museum for Human Rights",
+            Latitude = 49.8864282f,
+            Longitude = -97.1472173f,
+            OrganizerIDs = new List<int>() { 3, 4 },
+            Tags = "Museum HumanRights",
             Links = new Link[]
             {
                 new Link() { Type = Link.LinkType.Default, Path = "http://www.hsc.mb.ca" }
             },
-            Description = "UofM",
+            Description = "Volunteer to help in showcasing the human rights museum.",
             Requirements = new Requirement[] { },
             VolunteerIDs = new List<int>()
         },
         new EventInfo
         {
-            Name = "Event 4",
+            Name = "Help with Shoveling",
             Time = GetRandomFutureDate(),
-            Location = "UofM",
-            Latitude = 0,
-            Longitude = 0,
-            OrganizerIDs = new int[] { 3, 4 },
-            Tags = "",
+            Location = "145 Oakwood Ave",
+            Latitude = 49.8663082f,
+            Longitude = -97.1284419f,
+            OrganizerIDs = new List<int>() { 5 },
+            Tags = "Winter",
             Links = new Link[]
             {
                 new Link() { Type = Link.LinkType.Default, Path = "http://www.hsc.mb.ca" }
             },
-            Description = "",
+            Description = "I am a senior citizen who is unable to shovel my driveway.",
             Requirements = new Requirement[] { },
             VolunteerIDs = new List<int>()
         },
         new EventInfo
         {
-            Name = "Event 5",
+            Name = "WAG Volunteer",
             Time = GetRandomFutureDate(),
-            Location = "UofM",
-            Latitude = 0,
-            Longitude = 0,
-            OrganizerIDs = new int[] { 5 },
-            Tags = "",
+            Location = "Winnipeg Art Gallery",
+            Latitude = 49.8902412f,
+            Longitude = -97.1483334f,
+            OrganizerIDs = new List<int>() { 6 },
+            Tags = "WAG",
             Links = new Link[]
             {
                 new Link() { Type = Link.LinkType.Default, Path = "http://www.hsc.mb.ca" }
             },
-            Description = "",
-            Requirements = new Requirement[] { },
-            VolunteerIDs = new List<int>()
-        },
-        new EventInfo
-        {
-            Name = "Event 6",
-            Time = GetRandomFutureDate(),
-            Location = "UofM",
-            Latitude = 0,
-            Longitude = 0,
-            OrganizerIDs = new int[] { 6 },
-            Tags = "",
-            Links = new Link[]
-            {
-                new Link() { Type = Link.LinkType.Default, Path = "http://www.hsc.mb.ca" }
-            },
-            Description = "",
+            Description = "Come help out in the Winnipeg Art Gallery!",
             Requirements = new Requirement[] { },
             VolunteerIDs = new List<int>()
         },

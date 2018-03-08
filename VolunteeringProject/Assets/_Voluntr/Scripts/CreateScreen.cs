@@ -1,9 +1,13 @@
 ﻿using FantomLib;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CreateScreen : MonoBehaviour {
+    public bool ConfirmCreate = true;
+
     public DatePickerController DatePickerController;
     public MultiChoiceDialogController LinkMultiChoiceDialogController;
     public MultiChoiceDialogController RequirementMultiChoiceDialogController;
@@ -51,7 +55,14 @@ public class CreateScreen : MonoBehaviour {
 
         CreateButton.onClick.AddListener(delegate()
         {
-            CreateYesNoDialogController.Show();
+            if(ConfirmCreate)
+            {
+                CreateYesNoDialogController.Show();
+            }
+            else
+            {
+                CreateOpportunity("");
+            }
         });
 
         CreateYesNoDialogController.OnYes.AddListener(CreateOpportunity);
@@ -82,22 +93,35 @@ public class CreateScreen : MonoBehaviour {
     }
 
     private void CreateOpportunity(string result) {
+        StartCoroutine(_CreateOpportunity());
+    }
+
+    private IEnumerator _CreateOpportunity() {
+        Vector2 loc = Vector2.zero;
+
+        yield return StartCoroutine(GeocodeAPI._GetCoordinates(LocationInput.text, delegate (Vector2 coords)
+        {
+            loc = coords;
+        }));
+
         EventInfo evtInfo = new EventInfo()
         {
             Name = NameInput.text,
             Time = DateTime.Parse(DateText.text),
             Location = LocationInput.text,
-            Latitude = 0,
-            Longitude = 0,
+            Latitude = loc.x,
+            Longitude = loc.y,
             Tags = TagsInput.text,
             Description = DescriptionInput.text,
-            OrganizerIDs = new int[] { AppData.Users.Count - 1 }, // Hard code current user as last user
+            OrganizerIDs = new List<int>() { AppManager.CurrentUser.ID },
             Links = _links,
             Requirements = _requirements,
-            VolunteerIDs = new System.Collections.Generic.List<int>()
+            VolunteerIDs = new List<int>()
         };
 
         AppData.Events.Add(evtInfo);
+
+        AppManager.BuildMap();
 
         ToastController.Show("Created " + evtInfo.Name + ".");
 
