@@ -10,6 +10,8 @@ public class ListScreen : MonoBehaviour {
 
     private string[] filterTags;
 
+	private char[] stringSeparators = { ' ', ',' };
+
     private void Awake() {
         FilterInput.onEndEdit.AddListener(ApplyFilter);
         EventList.OnItemSelected += EventList_OnItemSelected;
@@ -21,7 +23,7 @@ public class ListScreen : MonoBehaviour {
     }
 
     private void ApplyFilter(string filterInput) {
-        filterTags = filterInput.ToLower().Split(' ', ',');
+        filterTags = filterInput.ToLower().Split(stringSeparators, System.StringSplitOptions.RemoveEmptyEntries);
         BuildList();
     }
 
@@ -35,7 +37,8 @@ public class ListScreen : MonoBehaviour {
         for (int i = 0; i < AppData.Events.Count; i++)
         {
             EventInfo evtInfo = AppData.Events[i];
-            if(filterTags.Length == 0 || MatchesFilter(evtInfo.Tags.ToLower().Split(' ', ',')))
+			string[] matchCriteria = evtInfo.Tags.ToLower().Split(stringSeparators, System.StringSplitOptions.RemoveEmptyEntries);
+			if (filterTags.Length == 0 || MatchesFilter(matchCriteria))
             {
                 EventList.AddItem(evtInfo);
             }
