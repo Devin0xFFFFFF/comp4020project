@@ -25,6 +25,7 @@ public class EventScreen : MonoBehaviour {
     public Sprite RegisteredSprite;
 
     private EventInfo _eventInfo;
+    private bool _showingPopup;
 
     public void Set(EventInfo eventInfo) {
         _eventInfo = eventInfo;
@@ -39,12 +40,22 @@ public class EventScreen : MonoBehaviour {
         SetLinks();
         SetRequirements();
 
+        _showingPopup = false;
+
         ActionButton.onClick.AddListener(ShowRegister);
 
         RegisterYesNoWithCheckBoxDialogController.OnYes.AddListener(Register);
+        RegisterYesNoWithCheckBoxDialogController.OnNo.AddListener(delegate (string s , bool no) { _showingPopup = false; });
     }
 
     private void ShowRegister() {
+        if(_showingPopup)
+        {
+            return;
+        }
+
+        _showingPopup = true;
+
         bool registered = _eventInfo.VolunteerIDs.Contains(AppManager.CurrentUser.ID);
         RegisterYesNoWithCheckBoxDialogController.DefaultChecked = registered;
         RegisterYesNoWithCheckBoxDialogController.message = (registered ? "Unregister" : "Register") + " for Opportunity?";
@@ -53,6 +64,8 @@ public class EventScreen : MonoBehaviour {
     }
 
     private void Register(string s, bool yes) {
+        _showingPopup = false;
+
         if (yes && !_eventInfo.VolunteerIDs.Contains(AppManager.CurrentUser.ID))
         {
             _eventInfo.VolunteerIDs.Add(AppManager.CurrentUser.ID);
