@@ -10,10 +10,19 @@ public class MapScreen : MonoBehaviour {
     public const float WPG_LAT = 49.8951f;
     public const float WPG_LNG = -97.1384f;
 
+    public Button EventButton;
     public RawImage MapImage;
     public Button MapMarkerButton;
 
+    private Button _selectedButton;
+
+    private void OnEnable() {
+        EventButton.gameObject.SetActive(false);
+    }
+
     public IEnumerator _BuildMap() {
+        EventButton.onClick.AddListener(GoToSelection);
+        EventButton.gameObject.SetActive(false);
         yield return _GetMap();
         LinkMarkers();
     }
@@ -25,8 +34,18 @@ public class MapScreen : MonoBehaviour {
             Button markerButton = MapImage.transform.GetChild(i).GetComponent<Button>();
             markerButton.onClick.AddListener(delegate () 
             {
-                AppManager.SwitchToEventScreen(AppData.Events[markerButton.transform.GetSiblingIndex()]);
+                EventButton.gameObject.SetActive(true);
+                Text text = EventButton.GetComponentInChildren<Text>();
+                text.text = AppData.Events[markerButton.transform.GetSiblingIndex()].Name;
+                _selectedButton = markerButton;
             });
+        }
+    }
+
+    private void GoToSelection() {
+        if(_selectedButton != null)
+        {
+            AppManager.SwitchToEventScreen(AppData.Events[_selectedButton.transform.GetSiblingIndex()]);
         }
     }
 

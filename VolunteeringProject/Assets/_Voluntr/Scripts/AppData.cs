@@ -214,6 +214,74 @@ public class AppData
             Requirements = new Requirement[] { },
             VolunteerIDs = new List<int>()
         },
+        new EventInfo
+        {
+            Name = "Science Fair Judge",
+            Time = GetRandomFutureDate(),
+            Location = "General Wolfe Junior High School",
+            Latitude = 49.8943475f,
+            Longitude = -97.1699769f,
+            OrganizerIDs = new List<int>() { 6 },
+            Tags = "Education",
+            Links = new Link[]
+            {
+                new Link() { Type = Link.LinkType.Default, Path = "http://www.hsc.mb.ca" }
+            },
+            Description = "Come help judge!",
+            Requirements = new Requirement[] { },
+            VolunteerIDs = new List<int>()
+        },
+        new EventInfo
+        {
+            Name = "Event Volunteer",
+            Time = GetRandomFutureDate(),
+            Location = "Balmoral Hall School",
+            Latitude = 49.8790499f,
+            Longitude = -97.1581215f,
+            OrganizerIDs = new List<int>() { 6 },
+            Tags = "Education",
+            Links = new Link[]
+            {
+                new Link() { Type = Link.LinkType.Default, Path = "http://www.hsc.mb.ca" }
+            },
+            Description = "Come help out!",
+            Requirements = new Requirement[] { },
+            VolunteerIDs = new List<int>()
+        },
+        new EventInfo
+        {
+            Name = "Help with Moving",
+            Time = GetRandomFutureDate(),
+            Location = "918 Alfred Avenue",
+            Latitude = 49.9250862f,
+            Longitude = -97.1695618f,
+            OrganizerIDs = new List<int>() { 6 },
+            Tags = "Exercise",
+            Links = new Link[]
+            {
+                new Link() { Type = Link.LinkType.Default, Path = "http://www.hsc.mb.ca" }
+            },
+            Description = "Come help out!",
+            Requirements = new Requirement[] { },
+            VolunteerIDs = new List<int>()
+        },
+        new EventInfo
+        {
+            Name = "Museum Volunteer",
+            Time = GetRandomFutureDate(),
+            Location = "The Fire Fighters Museum of Winnipeg",
+            Latitude = 49.9021431f,
+            Longitude = -97.1355803f,
+            OrganizerIDs = new List<int>() { 6 },
+            Tags = "Museum",
+            Links = new Link[]
+            {
+                new Link() { Type = Link.LinkType.Default, Path = "http://www.hsc.mb.ca" }
+            },
+            Description = "Come help out!",
+            Requirements = new Requirement[] { },
+            VolunteerIDs = new List<int>()
+        },
     };
 
     public static DateTime GetRandomFutureDate(int maxDays=30, int maxHours=24, int maxMinutes=60, int maxSeconds=60) {

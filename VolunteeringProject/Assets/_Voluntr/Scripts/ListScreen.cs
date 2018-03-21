@@ -18,6 +18,7 @@ public class ListScreen : MonoBehaviour {
     }
 
     private void OnEnable() {
+        FilterInput.text = "";
         filterTags = new string[0];
         BuildList();
     }
@@ -37,8 +38,10 @@ public class ListScreen : MonoBehaviour {
         for (int i = 0; i < AppData.Events.Count; i++)
         {
             EventInfo evtInfo = AppData.Events[i];
-			string[] matchCriteria = evtInfo.Tags.ToLower().Split(stringSeparators, System.StringSplitOptions.RemoveEmptyEntries);
-			if (filterTags.Length == 0 || MatchesFilter(matchCriteria))
+            string[] nameMatchCriteria = evtInfo.Name.ToLower().Split(stringSeparators, System.StringSplitOptions.RemoveEmptyEntries);
+            string[] locationMatchCriteria = evtInfo.Location.ToLower().Split(stringSeparators, System.StringSplitOptions.RemoveEmptyEntries);
+            string[] tagsMatchCriteria = evtInfo.Tags.ToLower().Split(stringSeparators, System.StringSplitOptions.RemoveEmptyEntries);
+			if (filterTags.Length == 0 || MatchesFilter(nameMatchCriteria) || MatchesFilter(locationMatchCriteria) || MatchesFilter(tagsMatchCriteria))
             {
                 EventList.AddItem(evtInfo);
             }
