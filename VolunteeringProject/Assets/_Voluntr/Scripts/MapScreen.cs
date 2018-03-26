@@ -37,6 +37,7 @@ public class MapScreen : MonoBehaviour {
                 EventButton.gameObject.SetActive(true);
                 Text text = EventButton.GetComponentInChildren<Text>();
                 text.text = AppData.Events[markerButton.transform.GetSiblingIndex()].Name;
+                ConsoleScreen.Log("SELECT", AppData.Events[markerButton.transform.GetSiblingIndex()].Name);
                 _selectedButton = markerButton;
             });
         }
@@ -45,6 +46,7 @@ public class MapScreen : MonoBehaviour {
     private void GoToSelection() {
         if(_selectedButton != null)
         {
+            ConsoleScreen.Log("GO TO", AppData.Events[_selectedButton.transform.GetSiblingIndex()].Name);
             AppManager.SwitchToEventScreen(AppData.Events[_selectedButton.transform.GetSiblingIndex()]);
         }
     }

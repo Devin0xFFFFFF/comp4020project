@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class AppManager : MonoBehaviour {
@@ -21,6 +19,9 @@ public class AppManager : MonoBehaviour {
     public ListScreen ListScreen;
     public MapScreen MapScreen;
     public CreateScreen CreateScreen;
+    public ConsoleScreen ConsoleScreen;
+
+    public static string CurrentScreen;
 
     private Stack<BackStackFrame> _backStack;
 
@@ -28,6 +29,7 @@ public class AppManager : MonoBehaviour {
         _instance = this;
         CurrentUser = AppData.Users[AppData.Users.Count - 1];
         _backStack = new Stack<BackStackFrame>();
+        ConsoleScreen.Instance = ConsoleScreen;
         HideMenu();
         SwitchToHomeScreen();
         BuildMap();
@@ -41,18 +43,26 @@ public class AppManager : MonoBehaviour {
         _instance.Menu.Hide();
     }
 
+    public void ToggleConsole() {
+        ConsoleScreen.gameObject.SetActive(!ConsoleScreen.gameObject.activeInHierarchy);
+    }
+
     public void Back() {
         if(_instance._backStack.Count > 1)
         {
             _instance._backStack.Pop();
             BackStackFrame frame = _instance._backStack.Pop();
+            string lastScreen = CurrentScreen;
+            string param = "";
             switch(frame.Screen)
             {
                 case 0: SwitchToHomeScreen();
                     break;
                 case 1: SwitchToEventScreen((EventInfo)frame.Param);
+                    param = ((EventInfo)frame.Param).Name;
                     break;
                 case 2: SwitchToProfileScreen((User)frame.Param);
+                    param = ((User)frame.Param).Name;
                     break;
                 case 3: SwitchToListScreen();
                     break;
@@ -61,6 +71,8 @@ public class AppManager : MonoBehaviour {
                 case 5: SwitchToCreateScreen();
                     break;
             }
+
+            ConsoleScreen.Log("BACK", string.Format("{0} -> {1} {2}", lastScreen, CurrentScreen, param));
         }
     }
 
@@ -68,6 +80,9 @@ public class AppManager : MonoBehaviour {
         _instance.DisableAllScreens();
         _instance.HomeScreen.gameObject.SetActive(true);
         _instance._backStack.Push(new BackStackFrame() { Screen = 0, Param = null });
+        string lastScreen = CurrentScreen;
+        CurrentScreen = "HOME";
+        ConsoleScreen.Log("SWITCH", string.Format("{0} -> {1}", lastScreen, CurrentScreen));
     }
 
     public static void SwitchToEventScreen(EventInfo eventInfo) {
@@ -75,6 +90,9 @@ public class AppManager : MonoBehaviour {
         _instance.EventScreen.gameObject.SetActive(true);
         _instance.EventScreen.Set(eventInfo);
         _instance._backStack.Push(new BackStackFrame() { Screen = 1, Param = eventInfo });
+        string lastScreen = CurrentScreen;
+        CurrentScreen = "EVENT";
+        ConsoleScreen.Log("SWITCH", string.Format("{0} -> {1}", lastScreen, CurrentScreen));
     }
 
     public static void SwitchToProfileScreen(User user) {
@@ -82,24 +100,36 @@ public class AppManager : MonoBehaviour {
         _instance.ProfileScreen.gameObject.SetActive(true);
         _instance.ProfileScreen.Set(user);
         _instance._backStack.Push(new BackStackFrame() { Screen = 2, Param = user });
-}
+        string lastScreen = CurrentScreen;
+        CurrentScreen = "PROFILE";
+        ConsoleScreen.Log("SWITCH", string.Format("{0} -> {1}", lastScreen, CurrentScreen));
+    }
 
     public static void SwitchToListScreen() {
         _instance.DisableAllScreens();
         _instance.ListScreen.gameObject.SetActive(true);
         _instance._backStack.Push(new BackStackFrame() { Screen = 3, Param = null });
+        string lastScreen = CurrentScreen;
+        CurrentScreen = "LIST";
+        ConsoleScreen.Log("SWITCH", string.Format("{0} -> {1}", lastScreen, CurrentScreen));
     }
 
     public static void SwitchToMapScreen() {
         _instance.DisableAllScreens();
         _instance.MapScreen.gameObject.SetActive(true);
         _instance._backStack.Push(new BackStackFrame() { Screen = 4, Param = null });
+        string lastScreen = CurrentScreen;
+        CurrentScreen = "MAP";
+        ConsoleScreen.Log("SWITCH", string.Format("{0} -> {1}", lastScreen, CurrentScreen));
     }
 
     public static void SwitchToCreateScreen() {
         _instance.DisableAllScreens();
         _instance.CreateScreen.gameObject.SetActive(true);
         _instance._backStack.Push(new BackStackFrame() { Screen = 5, Param = null });
+        string lastScreen = CurrentScreen;
+        CurrentScreen = "CREATE";
+        ConsoleScreen.Log("SWITCH", string.Format("{0} -> {1}", lastScreen, CurrentScreen));
     }
 
     public static void BuildMap() {

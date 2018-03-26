@@ -24,11 +24,13 @@ public class ListScreen : MonoBehaviour {
     }
 
     private void ApplyFilter(string filterInput) {
+        ConsoleScreen.Log("FILTER", filterInput);
         filterTags = filterInput.ToLower().Split(stringSeparators, System.StringSplitOptions.RemoveEmptyEntries);
         BuildList();
     }
 
     private void EventList_OnItemSelected(EventItem item) {
+        ConsoleScreen.Log("GO TO", item.NameText.text);
         AppManager.SwitchToEventScreen(item.EventInfo);
     }
 

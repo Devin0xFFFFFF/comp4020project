@@ -70,6 +70,8 @@ public class EventList : MonoBehaviour {
             _selected = item;
             selectionChanged = true;
 
+            ConsoleScreen.Log("SELECT", item.NameText.text);
+
             if (_lastSelected != null)
             {
                 _lastSelected.Selected = false;

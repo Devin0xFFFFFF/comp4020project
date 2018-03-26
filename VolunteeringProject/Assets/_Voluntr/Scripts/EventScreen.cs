@@ -54,6 +54,8 @@ public class EventScreen : MonoBehaviour {
             return;
         }
 
+        ConsoleScreen.Log("REGISTER", "Clicked");
+
         _showingPopup = true;
 
         bool registered = _eventInfo.VolunteerIDs.Contains(AppManager.CurrentUser.ID);
